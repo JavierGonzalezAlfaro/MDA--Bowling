@@ -1,4 +1,4 @@
-package com.hdsp.bowling;
+package com.hdsp.bowling.view;
 
 import java.util.Scanner;
 

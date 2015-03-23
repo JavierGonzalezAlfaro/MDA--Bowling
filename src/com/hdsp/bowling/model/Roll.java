@@ -1,4 +1,4 @@
-package com.hdsp.bowling;
+package com.hdsp.bowling.model;
 
 public class Roll {
     private Player player;

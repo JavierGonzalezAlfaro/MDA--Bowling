@@ -1,5 +1,5 @@
 
-package com.hdsp.bowling;
+package com.hdsp.bowling.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,23 +8,23 @@ import java.util.List;
 public class PlayerGame {
 
     private final Match match;
-    private final String playerName;
+    private final Player player;
 
-    public PlayerGame(Match match, String playerName) {
+    public PlayerGame(Match match, Player player) {
         this.match = match;
-        this.playerName = playerName;
+        this.player = player;
     }
 
     public PlayerFrame[] getFrames() {
-        return buildFrames(match.getRolls(playerName)).toArray(new PlayerFrame[0]);
+        return buildFrames(match.getRolls(player.id())).toArray(new PlayerFrame[0]);
     }
 
     private List<PlayerFrame> buildFrames(Roll[] rolls) {
         return new FrameBuilder(rolls).build();
     }
 
-    public String getPlayerName() {
-        return playerName;
+    public Player getPlayer() {
+        return player;
     }
 
     private class FrameBuilder {

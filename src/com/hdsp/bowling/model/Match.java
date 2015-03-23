@@ -1,4 +1,4 @@
-package com.hdsp.bowling;
+package com.hdsp.bowling.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +16,14 @@ public class Match {
         this.players.add(player);
     }
 
-    public Player getPlayer(String name) {
+    public Player getPlayerById(String name) {
         for (Player player : players)
-            if (player.getId().equals(name)) return player;
+            if (player.id().equals(name)) return player;
         return null;
     }
 
     public Roll[] getRolls(String playerName){
-        Player player = getPlayer(playerName);
+        Player player = getPlayerById(playerName);
         List<Roll> rolls = new ArrayList<>();
         for (Roll roll : this.rolls)
             if (roll.getPlayer() == player)
@@ -32,12 +32,9 @@ public class Match {
     }
 
     public AddRollTask addRolls(final int... pinsOfRolls) {
-        return new AddRollTask() {
-            @Override
-            public void toPlayer(String name) {
-                for (int pinsOfRoll : pinsOfRolls) {
-                    rolls.add(new Roll(getPlayer(name), pinsOfRoll));
-                }
+        return player -> {
+            for (int pinsOfRoll : pinsOfRolls) {
+                rolls.add(new Roll(getPlayerById(player.id()), pinsOfRoll));
             }
         };
     }
@@ -47,7 +44,7 @@ public class Match {
     }
 
     public interface AddRollTask {
-        void toPlayer(String name);
+        void toPlayer(Player player);
     }
 }
 
