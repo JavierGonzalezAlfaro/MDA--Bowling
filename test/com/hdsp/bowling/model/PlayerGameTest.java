@@ -67,6 +67,15 @@ public class PlayerGameTest {
     }
 
     @Test
+    public void withOneStrike() throws Exception {
+        match.addRolls(10).toPlayer(one);
+        PlayerGame playerGame = new PlayerGame(match, one);
+        assertEquals(1, playerGame.getFrames().length);
+        assertNull(playerGame.getFrames()[0].getScoring());
+        assertTrue(playerGame.getFrames()[0].isStrike());
+    }
+
+    @Test
     public void withStrikeAndTwoMoreRolls() throws Exception {
         match.addRolls(10,5,3).toPlayer(one);
         PlayerGame playerGame = new PlayerGame(match, one);

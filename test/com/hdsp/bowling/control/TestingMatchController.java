@@ -1,20 +1,11 @@
 package com.hdsp.bowling.control;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.hdsp.bowling.model.Player;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hdsp.bowling.model.Player;
-import com.hdsp.bowling.model.PlayerFrame;
-import com.hdsp.bowling.model.PlayerGame;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertThat;
 
 public class TestingMatchController {
 
@@ -80,14 +71,13 @@ public class TestingMatchController {
     }
 
     @Test
-    public void should_return_player_two_when_player_one_has_rolled_a_spare_on_last_frame() throws Exception{
+    public void should_return_player_two_when_player_one_has_rolled_a_strike_on_last_frame() throws Exception{
         for (int i = 0; i < 18; i++) {
             matchController.addRoll(3);
             matchController.addRoll(4);
         }
         assertThat(matchController.getPlayerTurn().id(), is("One"));
-        matchController.addRoll(3);
-        matchController.addRoll(7);
+        matchController.addRoll(10);
         assertThat(matchController.getPlayerTurn().id(), is("One"));
     }
 
@@ -97,10 +87,6 @@ public class TestingMatchController {
     private void addPlayers() {
         matchController.addPlayers(new Player("One"), new Player("Two"));
     }
-
-
-
-
 
 
 }
