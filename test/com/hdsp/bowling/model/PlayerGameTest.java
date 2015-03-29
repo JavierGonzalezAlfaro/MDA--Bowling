@@ -9,13 +9,15 @@ import static org.junit.Assert.*;
 public class PlayerGameTest {
 
     private final Player one;
+    private final Player two;
     private Match match;
 
     public PlayerGameTest() {
         match = new Match();
         one = new Player("one");
         match.addPlayer(one);
-        match.addPlayer(new Player("two"));
+        two = new Player("two");
+        match.addPlayer(two);
     }
 
     @Test
@@ -116,6 +118,19 @@ public class PlayerGameTest {
         assertEquals(240, playerGame.getFrames()[7].getScoring().getPoints());
         assertEquals(270, playerGame.getFrames()[8].getScoring().getPoints());
         assertEquals(300, playerGame.getFrames()[9].getScoring().getPoints());
+    }
+
+    @Test
+    public void withTwoRollsEachPlayer() throws Exception {
+        match.addRolls(4,5).toPlayer(one);
+        PlayerGame playerOneGame = new PlayerGame(match, one);
+        assertEquals(1, playerOneGame.getFrames().length);
+        assertEquals(9, playerOneGame.getFrames()[0].getScoring().getPoints());
+        match.addRolls(4,5).toPlayer(two);
+        PlayerGame playerTwoGame = new PlayerGame(match, one);
+        assertEquals(1, playerTwoGame.getFrames().length);
+        assertEquals(9, playerTwoGame.getFrames()[0].getScoring().getPoints());
+
     }
 
     @Test

@@ -16,7 +16,7 @@ public class PlayerGame {
     }
 
     public PlayerFrame[] getFrames() {
-        return buildFrames(match.getRolls(player.id())).toArray(new PlayerFrame[0]);
+        return buildFrames(match.getRollsByPlayer(player.id())).toArray(new PlayerFrame[0]);
     }
 
     private List<PlayerFrame> buildFrames(Roll[] rolls) {

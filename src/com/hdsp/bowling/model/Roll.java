@@ -9,9 +9,6 @@ public class Roll {
         this.pins = pins;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
 
     public int getPins() {
         return pins;

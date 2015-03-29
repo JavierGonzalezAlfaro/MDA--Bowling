@@ -2,6 +2,7 @@ package com.hdsp.bowling.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Match {
     private final List<Player> players;
@@ -22,19 +23,15 @@ public class Match {
         return null;
     }
 
-    public Roll[] getRolls(String playerName){
-        Player player = getPlayerById(playerName);
-        List<Roll> rolls = new ArrayList<>();
-        for (Roll roll : this.rolls)
-            if (roll.getPlayer() == player)
-                rolls.add(roll);
-        return this.rolls.toArray(new Roll[this.rolls.size()]);
+    public Roll[] getRollsByPlayer(String playerId){
+        Player currentPlayer = getPlayerById(playerId);
+        return rolls.stream().filter(roll -> currentPlayer == roll.getPlayer()).toArray(Roll[]::new);
     }
 
     public AddRollTask addRolls(final int... pinsOfRolls) {
         return player -> {
             for (int pinsOfRoll : pinsOfRolls) {
-                rolls.add(new Roll(getPlayerById(player.id()), pinsOfRoll));
+                rolls.add(new Roll(player, pinsOfRoll));
             }
         };
     }
