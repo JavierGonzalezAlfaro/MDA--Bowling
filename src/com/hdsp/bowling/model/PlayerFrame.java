@@ -16,6 +16,10 @@ public class PlayerFrame {
         return isStrike() ? 1 : 2;
     }
 
+    public int getNumberOfRollsInLastFrame(){
+        return rolls.length;
+    }
+
     public boolean isStrike() {
         return firstRollPins() == 10;
     }

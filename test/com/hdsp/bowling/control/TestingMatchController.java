@@ -71,7 +71,7 @@ public class TestingMatchController {
     }
 
     @Test
-    public void should_return_player_two_when_player_one_has_rolled_a_strike_on_last_frame() throws Exception{
+    public void should_return_player_one_when_player_one_has_rolled_a_strike_on_last_frame() throws Exception{
         for (int i = 0; i < 18; i++) {
             matchController.addRoll(3);
             matchController.addRoll(4);
@@ -79,6 +79,42 @@ public class TestingMatchController {
         assertThat(matchController.getPlayerTurn().id(), is("One"));
         matchController.addRoll(10);
         assertThat(matchController.getPlayerTurn().id(), is("One"));
+    }
+
+    @Test
+    public void should_return_player_two_when_player_one_has_rolled_two_single_rolls_on_last_frame() throws Exception{
+        for (int i = 0; i < 18; i++) {
+            matchController.addRoll(3);
+            matchController.addRoll(4);
+        }
+        assertThat(matchController.getPlayerTurn().id(), is("One"));
+        matchController.addRoll(3);
+        matchController.addRoll(5);
+        assertThat(matchController.getPlayerTurn().id(), is("Two"));
+    }
+
+    @Test
+    public void should_return_player_one_when_player_one_has_rolled_two_strikes_on_last_frame() throws Exception{
+        for (int i = 0; i < 18; i++) {
+            matchController.addRoll(3);
+            matchController.addRoll(4);
+        }
+        assertThat(matchController.getPlayerTurn().id(), is("One"));
+        matchController.addRoll(10);
+        matchController.addRoll(10);
+        assertThat(matchController.getPlayerTurn().id(), is("One"));
+    }
+    @Test
+    public void should_return_player_two_when_player_one_has_rolled_three_rolls_on_last_frame() throws Exception{
+        for (int i = 0; i < 18; i++) {
+            matchController.addRoll(3);
+            matchController.addRoll(4);
+        }
+        assertThat(matchController.getPlayerTurn().id(), is("One"));
+        matchController.addRoll(10);
+        matchController.addRoll(4);
+        matchController.addRoll(5);
+        assertThat(matchController.getPlayerTurn().id(), is("Two"));
     }
 
 

@@ -34,7 +34,7 @@ public class MatchController {
 
     public void addRoll(int pins) {
         currentMatch.addRolls(pins).toPlayer(getPlayerTurn());
-        if(isLastFrame() && (isSpare() || isStrike())  && currentPlayerLastFrame().getNumberOfRolls() < 3) {
+        if(isLastFrame() && (isSpare() || isStrike())  && currentPlayerLastFrame().getNumberOfRollsInLastFrame() < 3) {
             return;
         }
         if(hasLastFrameCompleted() || isStrike() || isSpare()) currentPlayerIndexCount++;
