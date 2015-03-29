@@ -1,4 +1,4 @@
-package com.hdsp.bowling;
+package com.hdsp.bowling.model;
 
 public class Player {
     private final String id;
@@ -7,7 +7,7 @@ public class Player {
         this.id = id;
     }
 
-    public String getId() {
+    public String id() {
         return id;
     }
 }

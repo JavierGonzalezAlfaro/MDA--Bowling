@@ -1,4 +1,4 @@
-package com.hdsp.bowling;
+package com.hdsp.bowling.model;
 
 public class Roll {
     private Player player;
@@ -9,9 +9,6 @@ public class Roll {
         this.pins = pins;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
 
     public int getPins() {
         return pins;

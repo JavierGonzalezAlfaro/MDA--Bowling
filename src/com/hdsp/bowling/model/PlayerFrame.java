@@ -1,7 +1,4 @@
-package com.hdsp.bowling;
-
-import java.util.Arrays;
-import java.util.List;
+package com.hdsp.bowling.model;
 
 public class PlayerFrame {
 
@@ -19,6 +16,18 @@ public class PlayerFrame {
         return isStrike() ? 1 : 2;
     }
 
+    public int getNumberOfRollsInLastFrame(){
+        return rolls.length;
+    }
+
+    public boolean isStrike() {
+        return firstRollPins() == 10;
+    }
+
+    public boolean isSpare() {
+        return hasTwoRolls() && pinsInTwoRolls() == 10;
+    }
+
     public Scoring getScoring() {
         return isComplete() ? new Scoring(points()) : null;
     }
@@ -33,14 +42,6 @@ public class PlayerFrame {
 
     private int pointsOfPreviousFrame() {
         return previousFrame.getScoring().getPoints();
-    }
-
-    public boolean isStrike() {
-        return firstRollPins() == 10;
-    }
-
-    public boolean isSpare() {
-        return hasTwoRolls() && pinsInTwoRolls() == 10;
     }
 
     private int pinsInTwoRolls() {
