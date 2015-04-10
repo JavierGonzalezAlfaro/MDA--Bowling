@@ -34,13 +34,19 @@ public class MatchController {
 
     public void addRoll(int pins) {
         currentMatch.addRolls(pins).toPlayer(getPlayerTurn());
-        if(isLastFrame() && (isSpare() || isStrike())  && currentPlayerLastFrame().getNumberOfRollsInLastFrame() < 3) {
-            return;
-        }
-        if(hasLastFrameCompleted() || isStrike() || isSpare()) currentPlayerIndexCount++;
+        if(isLastFrameOfMatch() && isStrikeOrSpare() && playerCanRollAgain()) return;
+        if(isLastFrameCompleted() || isStrikeOrSpare()) currentPlayerIndexCount++;
     }
 
-    private boolean isLastFrame() {
+    private boolean isStrikeOrSpare() {
+        return isSpare() || isStrike();
+    }
+
+    private boolean playerCanRollAgain() {
+        return currentPlayerLastFrame().getNumberOfRollsInLastFrame() < 3;
+    }
+
+    private boolean isLastFrameOfMatch() {
         return playerGames.get(currentPlayerIndex()).getFrames().length == 10;
     }
 
@@ -52,7 +58,7 @@ public class MatchController {
         return currentPlayerLastFrame().isStrike();
     }
 
-    private boolean hasLastFrameCompleted() {
+    private boolean isLastFrameCompleted() {
         return getCurrentPlayerLastFrameScoring() != null;
     }
 
@@ -68,6 +74,4 @@ public class MatchController {
     private int currentPlayerIndex() {
         return currentPlayerIndexCount % playerGames.size();
     }
-
-
 }
