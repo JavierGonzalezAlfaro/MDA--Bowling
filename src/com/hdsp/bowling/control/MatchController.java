@@ -15,9 +15,9 @@ public class MatchController {
     private Match currentMatch;
     private int currentPlayerIndexCount = 0;
 
-    public MatchController() {
-        playerGames = new ArrayList<>();
-        currentMatch = new Match();
+    public MatchController(Match currentMatch) {
+        this.playerGames = new ArrayList<>();
+        this.currentMatch = currentMatch;
     }
 
 
@@ -32,11 +32,18 @@ public class MatchController {
         return playerGames.get(currentPlayerIndex()).getPlayer();
     }
 
+
+    public Match getMatch() {
+        return currentMatch;
+    }
+
     public void addRoll(int pins) {
         currentMatch.addRolls(pins).toPlayer(getPlayerTurn());
         if(isLastFrameOfMatch() && isStrikeOrSpare() && playerCanRollAgain()) return;
         if(isLastFrameCompleted() || isStrikeOrSpare()) currentPlayerIndexCount++;
     }
+
+
 
     private boolean isStrikeOrSpare() {
         return isSpare() || isStrike();
@@ -74,4 +81,5 @@ public class MatchController {
     private int currentPlayerIndex() {
         return currentPlayerIndexCount % playerGames.size();
     }
+
 }
