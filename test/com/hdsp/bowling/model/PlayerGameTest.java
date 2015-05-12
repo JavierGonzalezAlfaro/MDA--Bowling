@@ -2,7 +2,6 @@ package com.hdsp.bowling.model;
 
 import org.junit.Test;
 
-import com.hdsp.bowling.control.MatchController;
 import static org.junit.Assert.*;
 
 

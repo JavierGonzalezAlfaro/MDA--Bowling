@@ -1,5 +1,6 @@
 package com.hdsp.bowling.control;
 
+import com.hdsp.bowling.model.Match;
 import com.hdsp.bowling.model.Player;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +14,7 @@ public class TestingMatchController {
 
     @Before
     public void setUp() throws Exception {
-        matchController = new MatchController();
+        matchController = new MatchController(new Match());
         addPlayers();
     }
 

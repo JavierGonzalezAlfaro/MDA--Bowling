@@ -82,4 +82,7 @@ public class MatchController {
         return currentPlayerIndexCount % playerGames.size();
     }
 
+    public List<Player> players() {
+        return currentMatch.getPlayers();
+    }
 }
